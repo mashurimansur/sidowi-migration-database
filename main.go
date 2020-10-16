@@ -27,28 +27,31 @@ func main() {
 	defer mongo.Session.Close()
 	defer postgres.Close()
 
+	//flag
 	migrate := flag.Bool("migrate", false, "to migrate table")
 	seed := flag.Bool("seed", false, "to insert data to table")
 	flag.Parse()
 
 	if *migrate {
 		MigrateTable()
-		return
 	}
 
 	if *seed {
-		mongoData := mongodb.NewMongoConnection(mongo)
-		postgresData := postgresql.NewPostgresConnection(postgres)
-
-		mongoKaders, _ := mongoData.GetAllKaders()
-		mongoOpenRegis, _ := mongoData.GetAllOpenRegis()
-
-		postgresData.SeederOpenRegistration(mongoOpenRegis)
-		postgresData.SeederKader(mongoKaders)
-		return
+		SeederTable()
 	}
 
-	fmt.Println("Tidak terjadi apa apa")
+	fmt.Println("Done!")
+}
+
+func SeederTable() {
+	postgresData := postgresql.NewPostgresConnection(postgres)
+	mongoData := mongodb.NewMongoConnection(mongo)
+
+	mongoKaders, _ := mongoData.GetAllKaders()
+	postgresData.SeederKader(mongoKaders)
+
+	mongoOpenRegis, _ := mongoData.GetAllOpenRegis()
+	postgresData.SeederOpenRegistration(mongoOpenRegis)
 }
 
 func MigrateTable() {

@@ -97,6 +97,7 @@ func (postgres *PostgresConnection) SeederKader(mongoKaders []mongodb.MongoKader
 		kader.CreatedAt = value.CreatedAt
 		kader.UpdatedAt = value.UpdateAt
 		kader.DeletedAt = value.DeletedAt
+
 		errInsert := postgres.InsertKader(&kader)
 		if errInsert == nil {
 			bar.Increment()
