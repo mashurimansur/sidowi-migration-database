@@ -21,30 +21,30 @@ func NewPostgresConnection(db *gorm.DB) *PostgresConnection {
 
 type Kaders struct {
 	ID             uint       `gorm:"primary_key" json:"id"`
+	Name           string     `gorm:"column:name;type:varchar(100);not null;" json:"name"`
+	Email          string     `gorm:"column:email;type:varchar(255);unique;not null;" json:"email"`
+	NIK            *string    `gorm:"column:nik;type:char(16);unique" json:"nik"`
+	DateBirth      time.Time  `gorm:"column:date_birth;type:date;not null;" json:"date_birth"`
+	PlaceBirth     string     `gorm:"column:place_birth;type:varchar(50);not null;" json:"place_birth"`
+	Avatar         string     `gorm:"column:avatar;type:varchar(255);not null;" json:"avatar"`
+	Job            string     `gorm:"column:job;type:varchar(100);not null;" json:"job"`
+	Office         string     `gorm:"column:office;type:varchar(100);not null;" json:"office"`
+	Skills         string     `gorm:"column:skills;type:varchar(255);not null;" json:"skills"`
+	Address        string     `gorm:"column:address;type:varchar(255);not null;" json:"address"`
+	Phone          string     `gorm:"column:phone;type:varchar(15);unique;not null;" json:"phone"`
+	BloodType      string     `gorm:"column:blood_type;type:char(2);not null;" json:"blood_type"`
+	Gender         string     `gorm:"column:gender;type:char(2);not null;" json:"gender"`
+	ZipCode        string     `gorm:"column:zip_code;type:varchar(7);not null;" json:"zip_code"`
+	ProvinceID     string     `gorm:"column:province_id;type:varchar(2);not null;" json:"province_id"`
+	CityID         string     `gorm:"column:city_id;type:varchar(4);not null;" json:"city_id"`
+	DistrictID     string     `gorm:"column:district_id;type:varchar(7);not null;" json:"district_id"`
+	VillageID      string     `gorm:"column:village_id;type:varchar(10);not null;" json:"village_id"`
+	Password       string     `gorm:"column:password;type:varchar(255);not null;" json:"password"`
+	Status         string     `gorm:"column:status;type:varchar(30)" json:"status"`
+	RegistrationID string     `gorm:"column:registration_id;type:varchar(5);" json:"registration_id"`
 	CreatedAt      time.Time  `json:"created_at"`
 	UpdatedAt      time.Time  `json:"updated_at"`
 	DeletedAt      *time.Time `sql:"index" json:"deleted_at"`
-	Name           string     `gorm:"column:name;type:varchar(100)" json:"name"`
-	Email          string     `gorm:"column:email;type:varchar(255)" json:"email"`
-	NIK            string     `gorm:"column:nik;type:char(16)"" json:"nik"`
-	DateBirth      time.Time  `gorm:"column:date_birth;type:date" json:"date_birth"`
-	PlaceBirth     string     `gorm:"column:place_birth;type:varchar(50)" json:"place_birth"`
-	Avatar         string     `gorm:"column:avatar;type:varchar(255)" json:"avatar"`
-	Job            string     `gorm:"column:job;type:varchar(100)" json:"job"`
-	Office         string     `gorm:"column:office;type:varchar(100)" json:"office"`
-	Skills         string     `gorm:"column:skills;type:varchar(255)" json:"skills"`
-	Address        string     `gorm:"column:address;type:varchar(255)" json:"address"`
-	Phone          string     `gorm:"column:phone;type:varchar(15)" json:"phone"`
-	BloodType      string     `gorm:"column:blood_type;type:char(2)" json:"blood_type"`
-	Gender         string     `gorm:"column:gender;type:char(2)" json:"gender"`
-	ZipCode        string     `gorm:"column:zip_code;type:varchar(7)" json:"zip_code"`
-	ProvinceID     string     `gorm:"column:province_id;type:varchar(2)" json:"province_id"`
-	CityID         string     `gorm:"column:city_id;type:varchar(4)" json:"city_id"`
-	DistrictID     string     `gorm:"column:district_id;type:varchar(7)" json:"district_id"`
-	VillageID      string     `gorm:"column:village_id;type:varchar(10)" json:"village_id"`
-	Password       string     `gorm:"column:password;type:varchar(255)" json:"password"`
-	Status         string     `gorm:"column:status;type:varchar(30)" json:"status"`
-	RegistrationID string     `gorm:"column:registration_id;type:varchar(5)" json:"registration_id"`
 }
 
 type OpenRegistration struct {
@@ -73,7 +73,11 @@ func (postgres *PostgresConnection) SeederKader(mongoKaders []mongodb.MongoKader
 		var kader Kaders
 		kader.Email = value.Email
 		kader.Name = value.Name
-		kader.NIK = value.NIK
+		if value.NIK != "" {
+			kader.NIK = &value.NIK
+		} else {
+			kader.NIK = nil
+		}
 		kader.DateBirth = value.DateBirth
 		kader.PlaceBirth = value.PlaceBirth
 		kader.Avatar = value.Avatar

@@ -30,6 +30,7 @@ func main() {
 	//flag
 	migrate := flag.Bool("migrate", false, "to migrate table")
 	seed := flag.Bool("seed", false, "to insert data to table")
+	drop := flag.Bool("drop", false, "to drop table")
 	flag.Parse()
 
 	if *migrate {
@@ -38,6 +39,10 @@ func main() {
 
 	if *seed {
 		SeederTable()
+	}
+
+	if *drop {
+		DropTable()
 	}
 
 	fmt.Println("Done!")
@@ -55,6 +60,10 @@ func SeederTable() {
 }
 
 func MigrateTable() {
-	postgres.AutoMigrate(&postgresql.Kaders{})
-	postgres.AutoMigrate(&postgresql.OpenRegistration{})
+	postgres.AutoMigrate(&postgresql.Kaders{}, &postgresql.OpenRegistration{})
+}
+
+func DropTable() {
+	postgres.DropTableIfExists(&postgresql.Kaders{})
+	postgres.DropTableIfExists(&postgresql.OpenRegistration{})
 }
