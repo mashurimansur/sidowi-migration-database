@@ -39,6 +39,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GoDepProject">
+    <integration-enabled>true</integration-enabled>
+    <exec-path>C:\Go\bin\dep.exe</exec-path>
+  </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/main.go" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/postgresql/save-data-to-posgres.go" root0="SKIP_INSPECTION" />
@@ -57,7 +61,7 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.tried.to.enable.integration.dep.integrator" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$" />
-    <property name="settings.editor.selected.configurable" value="preference.GoLinterConfigurable" />
+    <property name="settings.editor.selected.configurable" value="go.dep" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -94,7 +98,21 @@
       <option name="project" value="LOCAL" />
       <updated>1602967090735</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="update">
+      <created>1603451890166</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1603451890166</updated>
+    </task>
+    <task id="LOCAL-00005" summary="update">
+      <created>1603452401842</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1603452401842</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -125,20 +143,24 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="627" y="303" key="EditFileWatcherDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1602850222018" />
-    <state x="461" y="170" key="SettingsEditor" timestamp="1603451747511">
+    <state x="740" y="280" key="FileChooserDialogImpl" timestamp="1603452096079">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="461" y="170" key="SettingsEditor/0.0.1920.1050/1920.0.1600.870@0.0.1920.1050" timestamp="1603451747511" />
+    <state x="740" y="280" key="FileChooserDialogImpl/0.0.1920.1050/1920.0.1600.870@0.0.1920.1050" timestamp="1603452096079" />
+    <state x="461" y="170" key="SettingsEditor" timestamp="1603452098654">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="461" y="170" key="SettingsEditor/0.0.1920.1050/1920.0.1600.870@0.0.1920.1050" timestamp="1603452098654" />
     <state x="461" y="170" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1602850223461" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1603031967355">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1050/1920.0.1600.870@0.0.1920.1050" timestamp="1603031967355" />
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1050@0.0.1920.1050" timestamp="1602858293683" />
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1602967092010">
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1603452403375">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1050/1920.0.1600.870@0.0.1920.1050" timestamp="1602868597202" />
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1050/1920.0.1600.870@0.0.1920.1050" timestamp="1603452403375" />
     <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1602967092010" />
     <state x="725" y="232" key="com.goide.refactor.move.GoMoveDeclarationDialog" timestamp="1603031936805">
       <screen x="0" y="0" width="1920" height="1050" />
