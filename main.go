@@ -24,8 +24,10 @@ func init() {
 
 func main() {
 	// close connection DB
-	defer mongo.Session.Close()
-	defer postgres.Close()
+	defer func() {
+		mongo.Session.Close()
+		postgres.Close()
+	}()
 
 	//flag
 	migrate := flag.Bool("migrate", false, "to migrate table")
