@@ -20,7 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="45601d7a-4f2b-4da0-896d-61d2cf34f4ad" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/postgresql/save-data-to-posgres.go" beforeDir="false" afterPath="$PROJECT_DIR$/postgresql/save-data-to-posgres.go" afterDir="false" />
@@ -80,7 +79,21 @@
       <option name="project" value="LOCAL" />
       <updated>1602868594789</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="update">
+      <created>1602967073631</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1602967073632</updated>
+    </task>
+    <task id="LOCAL-00003" summary="update">
+      <created>1602967090735</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1602967090735</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -112,13 +125,27 @@
     </state>
     <state x="461" y="170" key="SettingsEditor/0.0.1920.1050/1920.0.1600.870@0.0.1920.1050" timestamp="1602845022009" />
     <state x="461" y="170" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1602850223461" />
-    <state width="498" height="446" key="SwitcherDM" timestamp="1602858293683">
+    <state width="498" height="446" key="SwitcherDM" timestamp="1603031967355">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
+    <state width="498" height="446" key="SwitcherDM/0.0.1920.1050/1920.0.1600.870@0.0.1920.1050" timestamp="1603031967355" />
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1050@0.0.1920.1050" timestamp="1602858293683" />
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1602868597202">
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1602967092010">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1050/1920.0.1600.870@0.0.1920.1050" timestamp="1602868597202" />
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1602967092010" />
+    <state x="725" y="232" key="com.goide.refactor.move.GoMoveDeclarationDialog" timestamp="1603031936805">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="725" y="232" key="com.goide.refactor.move.GoMoveDeclarationDialog/0.0.1920.1050/1920.0.1600.870@0.0.1920.1050" timestamp="1603031936805" />
+    <state x="601" y="251" width="700" height="530" key="recent.locations.popup" timestamp="1603023740422">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="601" y="251" width="700" height="530" key="recent.locations.popup/0.0.1920.1050/1920.0.1600.870@0.0.1920.1050" timestamp="1603023740422" />
+    <state x="623" y="227" key="search.everywhere.popup" timestamp="1603020637577">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="623" y="227" key="search.everywhere.popup/0.0.1920.1050/1920.0.1600.870@0.0.1920.1050" timestamp="1603020637577" />
   </component>
 </project>

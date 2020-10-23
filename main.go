@@ -53,7 +53,8 @@ func SeederTable() {
 	mongoData := mongodb.NewMongoConnection(mongo)
 
 	mongoKaders, _ := mongoData.GetAllKaders()
-	postgresData.SeederKader(mongoKaders)
+	//postgresData.SeederKader(mongoKaders)
+	postgresData.WorkerKaders(mongoKaders)
 
 	mongoOpenRegis, _ := mongoData.GetAllOpenRegis()
 	postgresData.SeederOpenRegistration(mongoOpenRegis)

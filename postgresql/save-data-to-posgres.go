@@ -5,6 +5,8 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/gammazero/workerpool"
+
 	"github.com/cheggaaa/pb"
 	"github.com/mashurimansur/sidowi-migration-database/mongodb"
 
@@ -147,5 +149,55 @@ func (postgres *PostgresConnection) FindOpenRegis(title string) (openRegis OpenR
 	if err = postgres.DB.Model(OpenRegistration{}).Where("title = ?", title).First(&openRegis).Error; err != nil {
 		return openRegis, err
 	}
+	return
+}
+
+func (postgres *PostgresConnection) WorkerKaders(kaders []mongodb.MongoKaders) {
+	wp := workerpool.New(10)
+
+	for _, kader := range kaders {
+		kader := kader
+		wp.Submit(func() {
+			data := postgres.KadersTransformer(kader)
+			postgres.InsertKader(&data)
+		})
+	}
+}
+
+func (postgres *PostgresConnection) KadersTransformer(mongoKader mongodb.MongoKaders) (kader Kaders) {
+	kader.Email = mongoKader.Email
+	kader.Name = mongoKader.Name
+	kader.DateBirth = mongoKader.DateBirth
+	kader.PlaceBirth = mongoKader.PlaceBirth
+	kader.Avatar = mongoKader.Avatar
+	kader.Job = mongoKader.Job
+	kader.Skills = mongoKader.Skills
+	kader.Office = mongoKader.Office
+	kader.Address = mongoKader.Address
+	kader.Phone = mongoKader.Phone
+	kader.BloodType = mongoKader.BloodType
+	kader.Gender = mongoKader.Gender
+	kader.ZipCode = mongoKader.ZipCode
+	kader.ProvinceID = strconv.Itoa(mongoKader.Province)
+	kader.CityID = strconv.Itoa(mongoKader.City)
+	kader.DistrictID = strconv.Itoa(mongoKader.District)
+	kader.VillageID = strconv.Itoa(mongoKader.Village)
+	kader.Password = mongoKader.Password
+	kader.Status = mongoKader.Status
+	kader.CreatedAt = mongoKader.CreatedAt
+	kader.UpdatedAt = mongoKader.UpdateAt
+	kader.DeletedAt = mongoKader.DeletedAt
+
+	if mongoKader.NIK != "" {
+		kader.NIK = &mongoKader.NIK
+	} else {
+		kader.NIK = nil
+	}
+
+	idOpenRegis, errFind := postgres.FindOpenRegis(mongoKader.RegistrationLog.Title)
+	if errFind == nil {
+		kader.RegistrationID = fmt.Sprint(idOpenRegis.ID)
+	}
+
 	return
 }
