@@ -21,8 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="45601d7a-4f2b-4da0-896d-61d2cf34f4ad" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/postgresql/save-data-to-posgres.go" beforeDir="false" afterPath="$PROJECT_DIR$/postgresql/save-data-to-posgres.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,12 +49,14 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
+    <property name="go.tried.to.enable.integration.dep.integrator" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$" />
-    <property name="settings.editor.selected.configurable" value="watcher.settings" />
+    <property name="settings.editor.selected.configurable" value="preference.GoLinterConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -116,14 +116,18 @@
     <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="710" y="345" key="#Notifications" timestamp="1603451475843">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="710" y="345" key="#Notifications/0.0.1920.1050/1920.0.1600.870@0.0.1920.1050" timestamp="1603451475843" />
     <state x="627" y="303" key="EditFileWatcherDialog" timestamp="1602850222018">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="627" y="303" key="EditFileWatcherDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1602850222018" />
-    <state x="461" y="170" key="SettingsEditor" timestamp="1602850223461">
+    <state x="461" y="170" key="SettingsEditor" timestamp="1603451747511">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="461" y="170" key="SettingsEditor/0.0.1920.1050/1920.0.1600.870@0.0.1920.1050" timestamp="1602845022009" />
+    <state x="461" y="170" key="SettingsEditor/0.0.1920.1050/1920.0.1600.870@0.0.1920.1050" timestamp="1603451747511" />
     <state x="461" y="170" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1602850223461" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1603031967355">
       <screen x="0" y="0" width="1920" height="1050" />
