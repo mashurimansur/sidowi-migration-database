@@ -37,25 +37,18 @@ func main() {
 
 	if *migrate {
 		MigrateTable()
+		return
 	}
 
 	if *seed {
 		SeederTable()
+		return
 	}
 
 	if *drop {
 		DropTable()
+		return
 	}
-
-	var countKader int
-	postgres.Table("kaders").Count(&countKader)
-	fmt.Printf("Total Kader: %d\n", countKader)
-
-	var countOpenRegis int
-	postgres.Table("open_registrations").Count(&countOpenRegis)
-	fmt.Printf("Total Open Registration: %d\n", countOpenRegis)
-
-	fmt.Println(database.Environment)
 
 	fmt.Println("Done!")
 }
@@ -73,7 +66,21 @@ func SeederTable() {
 }
 
 func MigrateTable() {
-	postgres.AutoMigrate(&postgresql.Kaders{}, &postgresql.OpenRegistration{})
+	postgres.AutoMigrate(
+		&postgresql.Kaders{},
+		&postgresql.OpenRegistration{},
+		&postgresql.IDProvince{},
+		&postgresql.IDCities{},
+		&postgresql.IDDistricts{},
+		&postgresql.IDVillages{},
+	)
+
+	postgres.Model(&postgresql.Kaders{}).
+		AddForeignKey("registration_id", "open_registrations(id)", "RESTRICT", "RESTRICT").
+		AddForeignKey("province_id", "id_provinces(id)", "RESTRICT", "RESTRICT").
+		AddForeignKey("city_id", "id_cities(id)", "RESTRICT", "RESTRICT").
+		AddForeignKey("district_id", "id_districts(id)", "RESTRICT", "RESTRICT").
+		AddForeignKey("village_id", "id_villages(id)", "RESTRICT", "RESTRICT")
 }
 
 func DropTable() {
