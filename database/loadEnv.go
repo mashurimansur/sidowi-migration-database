@@ -21,23 +21,23 @@ type Env struct {
 	MongoPassword string
 }
 
+var Environment Env
+
 // LoadEnv return env file to struct
-func LoadEnv() (c Env) {
+func LoadEnv() {
 	errLoadEnv := godotenv.Load(".env")
 	if errLoadEnv != nil {
 		log.Fatal("Error loading .env file")
 	}
 
-	c.PGDatabase = os.Getenv("PG_DATABASE")
-	c.PGUser = os.Getenv("PG_USERNAME")
-	c.PGPassword = os.Getenv("PG_PASSWORD")
-	c.PGHost = os.Getenv("PG_HOST")
-	c.PGPort = os.Getenv("PG_PORT")
-	c.MongoDatabase = os.Getenv("MONGO_DB")
-	c.MongoHost = os.Getenv("MONGO_HOST")
-	c.MongoPassword = os.Getenv("MONGO_PASSWORD")
-	c.MongoUser = os.Getenv("MONGO_USER")
-	c.MongoPort = os.Getenv("MONGO_PORT")
-
-	return c
+	Environment.PGDatabase = os.Getenv("PG_DATABASE")
+	Environment.PGUser = os.Getenv("PG_USERNAME")
+	Environment.PGPassword = os.Getenv("PG_PASSWORD")
+	Environment.PGHost = os.Getenv("PG_HOST")
+	Environment.PGPort = os.Getenv("PG_PORT")
+	Environment.MongoDatabase = os.Getenv("MONGO_DB")
+	Environment.MongoHost = os.Getenv("MONGO_HOST")
+	Environment.MongoPassword = os.Getenv("MONGO_PASSWORD")
+	Environment.MongoUser = os.Getenv("MONGO_USER")
+	Environment.MongoPort = os.Getenv("MONGO_PORT")
 }

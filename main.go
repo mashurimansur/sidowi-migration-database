@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/mashurimansur/sidowi-migration-database/database"
@@ -18,6 +17,7 @@ var (
 )
 
 func init() {
+	database.LoadEnv()
 	mongo = database.ConnectMongo()
 	postgres = database.ConnectPostgres()
 }
@@ -47,6 +47,16 @@ func main() {
 		DropTable()
 	}
 
+	var countKader int
+	postgres.Table("kaders").Count(&countKader)
+	fmt.Printf("Total Kader: %d\n", countKader)
+
+	var countOpenRegis int
+	postgres.Table("open_registrations").Count(&countOpenRegis)
+	fmt.Printf("Total Open Registration: %d\n", countOpenRegis)
+
+	fmt.Println(database.Environment)
+
 	fmt.Println("Done!")
 }
 
@@ -55,8 +65,8 @@ func SeederTable() {
 	mongoData := mongodb.NewMongoConnection(mongo)
 
 	mongoKaders, _ := mongoData.GetAllKaders()
-	//postgresData.SeederKader(mongoKaders)
-	postgresData.WorkerKaders(mongoKaders)
+	postgresData.SeederKader(mongoKaders)
+	//postgresData.WorkerKaders(mongoKaders)
 
 	mongoOpenRegis, _ := mongoData.GetAllOpenRegis()
 	postgresData.SeederOpenRegistration(mongoOpenRegis)
