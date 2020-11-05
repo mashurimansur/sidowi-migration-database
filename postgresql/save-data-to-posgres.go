@@ -1,7 +1,11 @@
 package postgresql
 
 import (
+	"encoding/csv"
 	"fmt"
+	"io"
+	"log"
+	"os"
 	"strconv"
 	"time"
 
@@ -21,8 +25,88 @@ func NewPostgresConnection(db *gorm.DB) *PostgresConnection {
 	return &PostgresConnection{DB: db}
 }
 
+func (postgres *PostgresConnection) InsertProvince() {
+	rows := postgres.ReadFileCSV("indonesia_provinces.csv")
+
+	for _, row := range rows[1:] {
+		province := IDProvince{
+			ID:   row[0],
+			Name: row[1],
+		}
+		postgres.DB.Model(IDProvince{}).Create(&province)
+	}
+}
+
+func (postgres *PostgresConnection) InsertCity() {
+	rows := postgres.ReadFileCSV("indonesia_cities.csv")
+
+	for _, row := range rows[1:] {
+		city := IDCities{
+			ID:         row[0],
+			ProvinceID: row[1],
+			Name:       row[2],
+		}
+		postgres.DB.Model(IDCities{}).Create(&city)
+	}
+}
+
+func (postgres *PostgresConnection) InsertDistrict() {
+	rows := postgres.ReadFileCSV("indonesia_districts.csv")
+
+	for _, row := range rows[1:] {
+		district := IDDistricts{
+			ID:     row[0],
+			CityID: row[1],
+			Name:   row[2],
+		}
+		postgres.DB.Model(IDDistricts{}).Create(&district)
+	}
+}
+
+func (postgres *PostgresConnection) InsertVillage() {
+	rows := postgres.ReadFileCSV("indonesia_villages.csv")
+
+	for _, row := range rows[1:] {
+		village := IDVillages{
+			ID:         row[0],
+			DistrictID: row[1],
+			Name:       row[2],
+		}
+		postgres.DB.Model(IDVillages{}).Create(&village)
+	}
+}
+
+func (posgres *PostgresConnection) ReadFileCSV(csvFile string) (result [][]string) {
+	csvFileProvince, _ := os.Open("./database/csv_indonesia/" + csvFile)
+	r := csv.NewReader(csvFileProvince)
+	// Iterate through the records
+	for {
+		record, err := r.Read()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		data := []string{}
+
+		if len(record) == 3 {
+			data = []string{record[0], record[1], record[2]}
+		}
+
+		if len(record) == 2 {
+			data = []string{record[0], record[1]}
+		}
+
+		result = append(result, data)
+	}
+	return result
+}
+
 func (postgres *PostgresConnection) InsertKader(kader *Kaders) (err error) {
 	if err = postgres.DB.Model(Kaders{}).Create(&kader).Error; err != nil {
+		log.Println(kader.Name)
 		return err
 	}
 	return

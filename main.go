@@ -56,13 +56,19 @@ func main() {
 func SeederTable() {
 	postgresData := postgresql.NewPostgresConnection(postgres)
 	mongoData := mongodb.NewMongoConnection(mongo)
-
-	mongoKaders, _ := mongoData.GetAllKaders()
-	postgresData.SeederKader(mongoKaders)
 	//postgresData.WorkerKaders(mongoKaders)
 
+	//get data from mongodb
 	mongoOpenRegis, _ := mongoData.GetAllOpenRegis()
+	mongoKaders, _ := mongoData.GetAllKaders()
+
+	//insert data
+	postgresData.WorkerProvince()
+	postgresData.WorkerVillage()
+	postgresData.WorkerDistrict()
+	postgresData.WorkerCity()
 	postgresData.SeederOpenRegistration(mongoOpenRegis)
+	postgresData.SeederKader(mongoKaders)
 }
 
 func MigrateTable() {
@@ -75,15 +81,18 @@ func MigrateTable() {
 		&postgresql.IDVillages{},
 	)
 
-	postgres.Model(&postgresql.Kaders{}).
-		AddForeignKey("registration_id", "open_registrations(id)", "RESTRICT", "RESTRICT").
-		AddForeignKey("province_id", "id_provinces(id)", "RESTRICT", "RESTRICT").
-		AddForeignKey("city_id", "id_cities(id)", "RESTRICT", "RESTRICT").
-		AddForeignKey("district_id", "id_districts(id)", "RESTRICT", "RESTRICT").
-		AddForeignKey("village_id", "id_villages(id)", "RESTRICT", "RESTRICT")
+	postgres.Model(&postgresql.Kaders{}).AddForeignKey("registration_id", "open_registrations(id)", "RESTRICT", "CASCADE").
+		AddForeignKey("province_id", "id_provinces(id)", "RESTRICT", "CASCADE").
+		AddForeignKey("city_id", "id_cities(id)", "RESTRICT", "CASCADE").
+		AddForeignKey("district_id", "id_districts(id)", "RESTRICT", "CASCADE").
+		AddForeignKey("village_id", "id_villages(id)", "RESTRICT", "CASCADE")
 }
 
 func DropTable() {
 	postgres.DropTableIfExists(&postgresql.Kaders{})
 	postgres.DropTableIfExists(&postgresql.OpenRegistration{})
+	postgres.DropTableIfExists(&postgresql.IDProvince{})
+	postgres.DropTableIfExists(&postgresql.IDCities{})
+	postgres.DropTableIfExists(&postgresql.IDDistricts{})
+	postgres.DropTableIfExists(&postgresql.IDVillages{})
 }

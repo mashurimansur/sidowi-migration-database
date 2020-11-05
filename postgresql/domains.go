@@ -47,9 +47,6 @@ type OpenRegistration struct {
 type IDProvince struct {
 	ID   string `gorm:"primary_key" json:"id"`
 	Name string `json:"name"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
-	Meta      string    `json:"meta"`
 }
 
 // IDCities struct for city
@@ -57,9 +54,6 @@ type IDCities struct {
 	ID         string `gorm:"primary_key" json:"id"`
 	ProvinceID string `json:"province_id"`
 	Name       string `json:"name"`
-	CreatedAt  time.Time `json:"created_at"`
-	UpdatedAt  time.Time `json:"updated_at"`
-	Meta       string    `json:"meta"`
 }
 
 // IDDistricts struct for district
@@ -67,9 +61,6 @@ type IDDistricts struct {
 	ID     string `gorm:"primary_key" json:"id"`
 	CityID string `json:"city_id"`
 	Name   string `json:"name"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
-	Meta      string    `json:"meta"`
 }
 
 // IDVillages struct for village
@@ -77,7 +68,4 @@ type IDVillages struct {
 	ID         string `gorm:"primary_key" json:"id"`
 	DistrictID string `json:"district_id"`
 	Name       string `json:"name"`
-	CreatedAt  time.Time `json:"created_at"`
-	UpdateAt   time.Time `json:"updated_at"`
-	Meta       string    `json:"meta"`
 }
