@@ -2,3 +2,4 @@
 /.idea
 /vendor
 /tmp/
+/.vendor-new/
