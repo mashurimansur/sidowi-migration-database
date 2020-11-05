@@ -63,10 +63,7 @@ func SeederTable() {
 	mongoKaders, _ := mongoData.GetAllKaders()
 
 	//insert data
-	postgresData.WorkerProvince()
-	postgresData.WorkerVillage()
-	postgresData.WorkerDistrict()
-	postgresData.WorkerCity()
+	postgresData.RunningWorkerIndonesia()
 	postgresData.SeederOpenRegistration(mongoOpenRegis)
 	postgresData.SeederKader(mongoKaders)
 }
