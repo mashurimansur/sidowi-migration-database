@@ -2,105 +2,62 @@
 
 
 [[projects]]
-  digest = "1:91973f1b719a112d20c1febdfd6fa69c143e8e2d5dc597591cb0ccee72f39040"
   name = "github.com/cheggaaa/pb"
   packages = ["."]
-  pruneopts = ""
   revision = "5784bcc95a1741c2ca2b46b19f1f3d398557300c"
   version = "v3.0.5"
 
 [[projects]]
-  digest = "1:a67f9275b42e8bb95ba38f705062175ef65538bcdc107e0771763e6cde80c3c3"
   name = "github.com/go-sql-driver/mysql"
   packages = ["."]
-  pruneopts = ""
   revision = "17ef3dd9d98b69acec3e85878995ada9533a9370"
   version = "v1.5.0"
 
 [[projects]]
-  digest = "1:299d6203263c24d96aaf690f2f8a7b62d950f2d041ceac510ae49aee2a3e2706"
   name = "github.com/jinzhu/gorm"
-  packages = [
-    ".",
-    "dialects/postgres",
-  ]
-  pruneopts = ""
+  packages = [".","dialects/postgres"]
   revision = "6f4358eeb5e3df768c182ae54d90ceacff0880a8"
   version = "v1.9.16"
 
 [[projects]]
-  digest = "1:a7b97371fb9af808b6a4fcc6693276ef7869bb1f282c3c87038c6c7e74ef4ae6"
   name = "github.com/jinzhu/inflection"
   packages = ["."]
-  pruneopts = ""
   revision = "f5c5f50e6090ae76a29240b61ae2a90dd810112e"
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:7df5a9695a743c3e1626b28bb8741602c8c15527e1efaeaec48ab2ff9a23f74c"
   name = "github.com/joho/godotenv"
   packages = ["."]
-  pruneopts = ""
   revision = "23d116af351c84513e1946b527c88823e476be13"
   version = "v1.3.0"
 
 [[projects]]
-  digest = "1:cc0415346693a9e894cab2df67f982daf816f3f4f484af0195295101f3095d2b"
   name = "github.com/lib/pq"
-  packages = [
-    ".",
-    "hstore",
-    "oid",
-    "scram",
-  ]
-  pruneopts = ""
+  packages = [".","hstore","oid","scram"]
   revision = "e7751f584844fbf92a5a18b13a0af1c855e34460"
   version = "v1.8.0"
 
 [[projects]]
-  digest = "1:59794624db141f0f0a893d110111b962984c9844cf565efa91c35bedb882c9ff"
   name = "github.com/mattn/go-runewidth"
   packages = ["."]
-  pruneopts = ""
   revision = "14e809f6d78fcf9f48ff9b70981472b64c05f754"
   version = "v0.0.9"
 
 [[projects]]
   branch = "master"
-  digest = "1:3538caa2b8a175379c0462f3358df3a75bdc67d3ea9bbf807995c7c7611fdf2e"
   name = "golang.org/x/sys"
-  packages = [
-    "internal/unsafeheader",
-    "unix",
-  ]
-  pruneopts = ""
+  packages = ["internal/unsafeheader","unix"]
   revision = "fb209a7c41cd8505b3b047ae14763a4d3d06fa19"
 
 [[projects]]
   branch = "v2"
-  digest = "1:e56755c5336ff37d20befca76df29097085c85ea1fe58af746e3df6b815decfa"
   name = "gopkg.in/mgo.v2"
-  packages = [
-    ".",
-    "bson",
-    "internal/json",
-    "internal/sasl",
-    "internal/scram",
-  ]
-  pruneopts = ""
+  packages = [".","bson","internal/json","internal/sasl","internal/scram"]
   revision = "a6b53ec6cb22a3699387a57a161566f9402ee85b"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  input-imports = [
-    "github.com/cheggaaa/pb",
-    "github.com/go-sql-driver/mysql",
-    "github.com/jinzhu/gorm",
-    "github.com/jinzhu/gorm/dialects/postgres",
-    "github.com/joho/godotenv",
-    "gopkg.in/mgo.v2",
-    "gopkg.in/mgo.v2/bson",
-  ]
+  inputs-digest = "4a72effce481bbbe0fdb62fab2b7355adb6a1af86abd639c084f28e9b75a4bbe"
   solver-name = "gps-cdcl"
   solver-version = 1
