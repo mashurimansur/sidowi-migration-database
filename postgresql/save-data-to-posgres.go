@@ -9,8 +9,6 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/gammazero/workerpool"
-
 	"github.com/cheggaaa/pb"
 	"github.com/mashurimansur/sidowi-migration-database/mongodb"
 
@@ -29,8 +27,9 @@ func (postgres *PostgresConnection) InsertProvince() {
 	rows := postgres.ReadFileCSV("indonesia_provinces.csv")
 
 	for _, row := range rows[1:] {
+		id, _ := strconv.ParseUint(row[0], 10, 32)
 		province := IDProvince{
-			ID:   row[0],
+			ID:   uint(id),
 			Name: row[1],
 		}
 		postgres.DB.Model(IDProvince{}).Create(&province)
@@ -41,9 +40,11 @@ func (postgres *PostgresConnection) InsertCity() {
 	rows := postgres.ReadFileCSV("indonesia_cities.csv")
 
 	for _, row := range rows[1:] {
+		id, _ := strconv.ParseUint(row[0], 10, 32)
+		provinceID, _ := strconv.ParseUint(row[1], 10, 32)
 		city := IDCities{
-			ID:         row[0],
-			ProvinceID: row[1],
+			ID:         uint(id),
+			ProvinceID: uint(provinceID),
 			Name:       row[2],
 		}
 		postgres.DB.Model(IDCities{}).Create(&city)
@@ -54,9 +55,11 @@ func (postgres *PostgresConnection) InsertDistrict() {
 	rows := postgres.ReadFileCSV("indonesia_districts.csv")
 
 	for _, row := range rows[1:] {
+		id, _ := strconv.ParseUint(row[0], 10, 32)
+		cityID, _ := strconv.ParseUint(row[1], 10, 32)
 		district := IDDistricts{
-			ID:     row[0],
-			CityID: row[1],
+			ID:     uint(id),
+			CityID: uint(cityID),
 			Name:   row[2],
 		}
 		postgres.DB.Model(IDDistricts{}).Create(&district)
@@ -67,9 +70,11 @@ func (postgres *PostgresConnection) InsertVillage() {
 	rows := postgres.ReadFileCSV("indonesia_villages.csv")
 
 	for _, row := range rows[1:] {
+		id, _ := strconv.ParseUint(row[0], 10, 32)
+		districtID, _ := strconv.ParseUint(row[1], 10, 32)
 		village := IDVillages{
-			ID:         row[0],
-			DistrictID: row[1],
+			ID:         id,
+			DistrictID: uint(districtID),
 			Name:       row[2],
 		}
 		postgres.DB.Model(IDVillages{}).Create(&village)
@@ -135,14 +140,16 @@ func (postgres *PostgresConnection) SeederKader(mongoKaders []mongodb.MongoKader
 		kader.BloodType = value.BloodType
 		kader.Gender = value.Gender
 		kader.ZipCode = value.ZipCode
-		kader.ProvinceID = strconv.Itoa(value.Province)
-		kader.CityID = strconv.Itoa(value.City)
-		kader.DistrictID = strconv.Itoa(value.District)
-		kader.VillageID = strconv.Itoa(value.Village)
+		kader.ProvinceID = uint(value.Province)
+		kader.CityID = uint(value.City)
+		kader.DistrictID = uint(value.District)
+		kader.VillageID = uint64(value.Village)
 		kader.Password = value.Password
 		kader.Status = value.Status
 		if errFind == nil {
-			kader.RegistrationID = int(idOpenRegis.ID)
+			kader.RegistrationID = &idOpenRegis.ID
+		} else {
+			kader.RegistrationID = nil
 		}
 		kader.CreatedAt = value.CreatedAt
 		kader.UpdatedAt = value.UpdateAt
@@ -196,52 +203,32 @@ func (postgres *PostgresConnection) FindOpenRegis(title string) (openRegis OpenR
 	return
 }
 
-func (postgres *PostgresConnection) WorkerKaders(kaders []mongodb.MongoKaders) {
-	wp := workerpool.New(10)
-
-	for _, kader := range kaders {
-		kader := kader
-		wp.Submit(func() {
-			data := postgres.KadersTransformer(kader)
-			postgres.InsertKader(&data)
-		})
-	}
-}
-
-func (postgres *PostgresConnection) KadersTransformer(mongoKader mongodb.MongoKaders) (kader Kaders) {
-	kader.Email = mongoKader.Email
-	kader.Name = mongoKader.Name
-	kader.DateBirth = mongoKader.DateBirth
-	kader.PlaceBirth = mongoKader.PlaceBirth
-	kader.Avatar = mongoKader.Avatar
-	kader.Job = mongoKader.Job
-	kader.Skills = mongoKader.Skills
-	kader.Office = mongoKader.Office
-	kader.Address = mongoKader.Address
-	kader.Phone = mongoKader.Phone
-	kader.BloodType = mongoKader.BloodType
-	kader.Gender = mongoKader.Gender
-	kader.ZipCode = mongoKader.ZipCode
-	kader.ProvinceID = strconv.Itoa(mongoKader.Province)
-	kader.CityID = strconv.Itoa(mongoKader.City)
-	kader.DistrictID = strconv.Itoa(mongoKader.District)
-	kader.VillageID = strconv.Itoa(mongoKader.Village)
-	kader.Password = mongoKader.Password
-	kader.Status = mongoKader.Status
-	kader.CreatedAt = mongoKader.CreatedAt
-	kader.UpdatedAt = mongoKader.UpdateAt
-	kader.DeletedAt = mongoKader.DeletedAt
-
-	if mongoKader.NIK != "" {
-		kader.NIK = &mongoKader.NIK
-	} else {
-		kader.NIK = nil
+func (postgres PostgresConnection) InsertRoles() {
+	var roles = []Roles{
+		{
+			ID:          1,
+			CreatedAt:   time.Now(),
+			UpdatedAt:   time.Now(),
+			Name:        "superadmin",
+			Description: "ini adalah super admin",
+		},
+		{
+			ID:          2,
+			CreatedAt:   time.Now(),
+			UpdatedAt:   time.Now(),
+			Name:        "admin",
+			Description: "ini adalah admin",
+		},
+		{
+			ID:          3,
+			CreatedAt:   time.Now(),
+			UpdatedAt:   time.Now(),
+			Name:        "kader",
+			Description: "ini adalah kader",
+		},
 	}
 
-	idOpenRegis, errFind := postgres.FindOpenRegis(mongoKader.RegistrationLog.Title)
-	if errFind == nil {
-		kader.RegistrationID = int(idOpenRegis.ID)
+	for _, v := range roles {
+		postgres.DB.Model(Roles{}).Create(&v)
 	}
-
-	return
 }

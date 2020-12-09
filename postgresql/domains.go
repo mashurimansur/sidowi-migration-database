@@ -1,6 +1,8 @@
 package postgresql
 
-import "time"
+import (
+	"time"
+)
 
 // Kaders adfasd
 type Kaders struct {
@@ -19,16 +21,19 @@ type Kaders struct {
 	BloodType      string     `gorm:"column:blood_type;type:char(2);not null;" json:"blood_type"`
 	Gender         string     `gorm:"column:gender;type:char(2);not null;" json:"gender"`
 	ZipCode        string     `gorm:"column:zip_code;type:varchar(7);not null;" json:"zip_code"`
-	ProvinceID     string     `gorm:"column:province_id;type:varchar(2);not null;" json:"province_id"`
-	CityID         string     `gorm:"column:city_id;type:varchar(4);not null;" json:"city_id"`
-	DistrictID     string     `gorm:"column:district_id;type:varchar(7);not null;" json:"district_id"`
-	VillageID      string     `gorm:"column:village_id;type:varchar(10);not null;" json:"village_id"`
+	ProvinceID     uint       `gorm:"column:province_id;not null;" json:"province_id"`
+	CityID         uint       `gorm:"column:city_id;not null;" json:"city_id"`
+	DistrictID     uint       `gorm:"column:district_id;not null;" json:"district_id"`
+	VillageID      uint64     `gorm:"column:village_id;not null;" json:"village_id"`
+	RegistrationID *uint      `gorm:"column:registration_id;varchar(10);" json:"registration_id"`
 	Password       string     `gorm:"column:password;type:varchar(255);not null;" json:"password"`
 	Status         string     `gorm:"column:status;type:varchar(30)" json:"status"`
-	RegistrationID int     `gorm:"column:registration_id;" json:"registration_id"`
 	CreatedAt      time.Time  `json:"created_at"`
 	UpdatedAt      time.Time  `json:"updated_at"`
 	DeletedAt      *time.Time `sql:"index" json:"deleted_at"`
+
+	//Roles []Roles `gorm:"many2many:kaders_roles" json:",omitempty"`
+	//Province IDProvince `gorm:"foreignkey:ID;references:province_id"`
 }
 
 type OpenRegistration struct {
@@ -43,29 +48,50 @@ type OpenRegistration struct {
 	DeletedAt         *time.Time `sql:"index" json:"deleted_at"`
 }
 
+type Marhalahs struct {
+	ID        uint      `gorm:"primary_key" json:"id"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
+	Name      string    `json:"name"`
+}
 
 type IDProvince struct {
-	ID   string `gorm:"primary_key" json:"id"`
+	ID   uint   `gorm:"primary_key" json:"id"`
 	Name string `json:"name"`
 }
 
 // IDCities struct for city
 type IDCities struct {
-	ID         string `gorm:"primary_key" json:"id"`
-	ProvinceID string `json:"province_id"`
+	ID         uint   `gorm:"primary_key" json:"id"`
+	ProvinceID uint   `json:"province_id"`
 	Name       string `json:"name"`
 }
 
 // IDDistricts struct for district
 type IDDistricts struct {
-	ID     string `gorm:"primary_key" json:"id"`
-	CityID string `json:"city_id"`
+	ID     uint   `gorm:"primary_key" json:"id"`
+	CityID uint   `json:"city_id"`
 	Name   string `json:"name"`
 }
 
 // IDVillages struct for village
 type IDVillages struct {
-	ID         string `gorm:"primary_key" json:"id"`
-	DistrictID string `json:"district_id"`
+	ID         uint64 `gorm:"primary_key" json:"id"`
+	DistrictID uint   `json:"district_id"`
 	Name       string `json:"name"`
+}
+
+type Roles struct {
+	ID          uint      `gorm:"primary_key" json:"id"`
+	CreatedAt   time.Time `json:"created_at"`
+	UpdatedAt   time.Time `json:"updated_at"`
+	Name        string    `gorm:"column:name;type:varchar(20);unique;not null;" json:"name"`
+	Description string    `gorm:"column:description;type:varchar(100);" json:"description"`
+
+	//Kaders []Kaders `gorm:"many2many:kaders_roles" json:",omitempty"`
+}
+
+type KadersRoles struct {
+	KadersID uint
+	RolesID  uint
 }

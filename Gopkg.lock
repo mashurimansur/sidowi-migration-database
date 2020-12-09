@@ -10,20 +10,12 @@
   version = "v3.0.5"
 
 [[projects]]
-  branch = "master"
-  digest = "1:67778a68bd71b0aacf2bb71e8673f13d94e5b6173b6d8458ec20862edfab2f02"
-  name = "github.com/gammazero/deque"
+  digest = "1:a67f9275b42e8bb95ba38f705062175ef65538bcdc107e0771763e6cde80c3c3"
+  name = "github.com/go-sql-driver/mysql"
   packages = ["."]
   pruneopts = ""
-  revision = "3932da5530cc99a4d4c8a8768c0b39aaf89be2a9"
-
-[[projects]]
-  digest = "1:98b4f5e5004f4447d8210b1fcf6e28e949bda5364bb39782984c0182b6e19b53"
-  name = "github.com/gammazero/workerpool"
-  packages = ["."]
-  pruneopts = ""
-  revision = "5675e28f7f6f4bfc5c74acaaf2575b1687ff671f"
-  version = "v1.1.1"
+  revision = "17ef3dd9d98b69acec3e85878995ada9533a9370"
+  version = "v1.5.0"
 
 [[projects]]
   digest = "1:299d6203263c24d96aaf690f2f8a7b62d950f2d041ceac510ae49aee2a3e2706"
@@ -103,7 +95,7 @@
   analyzer-version = 1
   input-imports = [
     "github.com/cheggaaa/pb",
-    "github.com/gammazero/workerpool",
+    "github.com/go-sql-driver/mysql",
     "github.com/jinzhu/gorm",
     "github.com/jinzhu/gorm/dialects/postgres",
     "github.com/joho/godotenv",

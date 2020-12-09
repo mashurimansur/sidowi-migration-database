@@ -50,6 +50,13 @@ func main() {
 		return
 	}
 
+	//var kaders postgresql.Kaders
+	//postgres.Model(postgresql.Kaders{}).Preload("Roles").Where("id = ?", 2).First(&kaders)
+	////postgres.Model(postgresql.Kaders{}).Preload("IDProvince").Where("id = ?", 440).First(&kaders)
+	//
+	//s, _ := json.MarshalIndent(kaders, "", "\t")
+	//fmt.Println(string(s))
+
 	fmt.Println("Done!")
 }
 
@@ -64,6 +71,7 @@ func SeederTable() {
 
 	//insert data
 	postgresData.RunningWorkerIndonesia()
+	postgresData.InsertRoles()
 	postgresData.SeederOpenRegistration(mongoOpenRegis)
 	postgresData.SeederKader(mongoKaders)
 }
@@ -71,11 +79,14 @@ func SeederTable() {
 func MigrateTable() {
 	postgres.AutoMigrate(
 		&postgresql.Kaders{},
+		&postgresql.Marhalahs{},
 		&postgresql.OpenRegistration{},
 		&postgresql.IDProvince{},
 		&postgresql.IDCities{},
 		&postgresql.IDDistricts{},
 		&postgresql.IDVillages{},
+		&postgresql.Roles{},
+		&postgresql.KadersRoles{},
 	)
 
 	postgres.Model(&postgresql.Kaders{}).AddForeignKey("registration_id", "open_registrations(id)", "RESTRICT", "CASCADE").
@@ -83,13 +94,24 @@ func MigrateTable() {
 		AddForeignKey("city_id", "id_cities(id)", "RESTRICT", "CASCADE").
 		AddForeignKey("district_id", "id_districts(id)", "RESTRICT", "CASCADE").
 		AddForeignKey("village_id", "id_villages(id)", "RESTRICT", "CASCADE")
+
+	postgres.Model(postgresql.KadersRoles{}).
+		AddForeignKey("kaders_id", "kaders(id)", "CASCADE", "CASCADE").
+		AddForeignKey("roles_id", "roles(id)", "CASCADE", "CASCADE")
 }
 
 func DropTable() {
-	postgres.DropTableIfExists(&postgresql.Kaders{})
-	postgres.DropTableIfExists(&postgresql.OpenRegistration{})
-	postgres.DropTableIfExists(&postgresql.IDProvince{})
-	postgres.DropTableIfExists(&postgresql.IDCities{})
-	postgres.DropTableIfExists(&postgresql.IDDistricts{})
-	postgres.DropTableIfExists(&postgresql.IDVillages{})
+	postgres.DropTableIfExists(
+		&postgresql.KadersRoles{},
+		&postgresql.Roles{},
+		&postgresql.Marhalahs{},
+		&postgresql.Kaders{},
+		&postgresql.OpenRegistration{},
+		&postgresql.IDProvince{},
+		&postgresql.IDCities{},
+		&postgresql.IDCities{},
+		&postgresql.IDDistricts{},
+		&postgresql.IDVillages{},
+	)
+
 }
