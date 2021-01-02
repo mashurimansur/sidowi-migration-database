@@ -21,10 +21,10 @@ type Kaders struct {
 	BloodType      string     `gorm:"column:blood_type;type:char(2);not null;" json:"blood_type"`
 	Gender         string     `gorm:"column:gender;type:char(2);not null;" json:"gender"`
 	ZipCode        string     `gorm:"column:zip_code;type:varchar(7);not null;" json:"zip_code"`
-	ProvinceID     uint       `gorm:"column:province_id;not null;" json:"province_id"`
-	CityID         uint       `gorm:"column:city_id;not null;" json:"city_id"`
-	DistrictID     uint       `gorm:"column:district_id;not null;" json:"district_id"`
-	VillageID      uint64     `gorm:"column:village_id;not null;" json:"village_id"`
+	ProvinceID     string     `gorm:"column:province_id;type:char(2);not null;" json:"province_id"`
+	CityID         string     `gorm:"column:city_id;type:char(4);not null;" json:"city_id"`
+	DistrictID     string     `gorm:"column:district_id;type:char(7);not null;" json:"district_id"`
+	VillageID      string     `gorm:"column:village_id;type:char(10);not null;" json:"village_id"`
 	RegistrationID *uint      `gorm:"column:registration_id;varchar(10);" json:"registration_id"`
 	Password       string     `gorm:"column:password;type:varchar(255);not null;" json:"password"`
 	Status         string     `gorm:"column:status;type:varchar(30)" json:"status"`
@@ -56,28 +56,28 @@ type Marhalahs struct {
 }
 
 type IDProvince struct {
-	ID   uint   `gorm:"primary_key" json:"id"`
+	ID   string `type:char(2)" json:"id"`
 	Name string `json:"name"`
 }
 
 // IDCities struct for city
 type IDCities struct {
-	ID         uint   `gorm:"primary_key" json:"id"`
-	ProvinceID uint   `json:"province_id"`
+	ID         string `type:char(4);" json:"id"`
+	ProvinceID string `gorm:"type:char(2)" json:"province_id"`
 	Name       string `json:"name"`
 }
 
 // IDDistricts struct for district
 type IDDistricts struct {
-	ID     uint   `gorm:"primary_key" json:"id"`
-	CityID uint   `json:"city_id"`
+	ID     string `gorm:"type:char(7)" json:"id"`
+	CityID string `gorm:"type:char(4)" json:"city_id"`
 	Name   string `json:"name"`
 }
 
 // IDVillages struct for village
 type IDVillages struct {
-	ID         uint64 `gorm:"primary_key" json:"id"`
-	DistrictID uint   `json:"district_id"`
+	ID         string `type:char(10)" json:"id"`
+	DistrictID string `gorm:"type:char(7)" json:"district_id"`
 	Name       string `json:"name"`
 }
 

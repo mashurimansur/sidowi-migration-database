@@ -27,9 +27,8 @@ func (postgres *PostgresConnection) InsertProvince() {
 	rows := postgres.ReadFileCSV("indonesia_provinces.csv")
 
 	for _, row := range rows[1:] {
-		id, _ := strconv.ParseUint(row[0], 10, 32)
 		province := IDProvince{
-			ID:   uint(id),
+			ID:   row[0],
 			Name: row[1],
 		}
 		postgres.DB.Model(IDProvince{}).Create(&province)
@@ -40,11 +39,9 @@ func (postgres *PostgresConnection) InsertCity() {
 	rows := postgres.ReadFileCSV("indonesia_cities.csv")
 
 	for _, row := range rows[1:] {
-		id, _ := strconv.ParseUint(row[0], 10, 32)
-		provinceID, _ := strconv.ParseUint(row[1], 10, 32)
 		city := IDCities{
-			ID:         uint(id),
-			ProvinceID: uint(provinceID),
+			ID:         row[0],
+			ProvinceID: row[1],
 			Name:       row[2],
 		}
 		postgres.DB.Model(IDCities{}).Create(&city)
@@ -55,11 +52,9 @@ func (postgres *PostgresConnection) InsertDistrict() {
 	rows := postgres.ReadFileCSV("indonesia_districts.csv")
 
 	for _, row := range rows[1:] {
-		id, _ := strconv.ParseUint(row[0], 10, 32)
-		cityID, _ := strconv.ParseUint(row[1], 10, 32)
 		district := IDDistricts{
-			ID:     uint(id),
-			CityID: uint(cityID),
+			ID:     row[0],
+			CityID: row[1],
 			Name:   row[2],
 		}
 		postgres.DB.Model(IDDistricts{}).Create(&district)
@@ -70,11 +65,9 @@ func (postgres *PostgresConnection) InsertVillage() {
 	rows := postgres.ReadFileCSV("indonesia_villages.csv")
 
 	for _, row := range rows[1:] {
-		id, _ := strconv.ParseUint(row[0], 10, 32)
-		districtID, _ := strconv.ParseUint(row[1], 10, 32)
 		village := IDVillages{
-			ID:         id,
-			DistrictID: uint(districtID),
+			ID:         row[0],
+			DistrictID: row[1],
 			Name:       row[2],
 		}
 		postgres.DB.Model(IDVillages{}).Create(&village)
@@ -140,10 +133,10 @@ func (postgres *PostgresConnection) SeederKader(mongoKaders []mongodb.MongoKader
 		kader.BloodType = value.BloodType
 		kader.Gender = value.Gender
 		kader.ZipCode = value.ZipCode
-		kader.ProvinceID = uint(value.Province)
-		kader.CityID = uint(value.City)
-		kader.DistrictID = uint(value.District)
-		kader.VillageID = uint64(value.Village)
+		kader.ProvinceID = strconv.Itoa(value.Province)
+		kader.CityID = strconv.Itoa(value.City)
+		kader.DistrictID = strconv.Itoa(value.District)
+		kader.VillageID = strconv.Itoa(value.Village)
 		kader.Password = value.Password
 		kader.Status = value.Status
 		if errFind == nil {

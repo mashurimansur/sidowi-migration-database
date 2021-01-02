@@ -89,7 +89,8 @@ func MigrateTable() {
 		&postgresql.KadersRoles{},
 	)
 
-	postgres.Model(&postgresql.Kaders{}).AddForeignKey("registration_id", "open_registrations(id)", "RESTRICT", "CASCADE").
+	postgres.Model(&postgresql.Kaders{}).
+		AddForeignKey("registration_id", "open_registrations(id)", "RESTRICT", "CASCADE").
 		AddForeignKey("province_id", "id_provinces(id)", "RESTRICT", "CASCADE").
 		AddForeignKey("city_id", "id_cities(id)", "RESTRICT", "CASCADE").
 		AddForeignKey("district_id", "id_districts(id)", "RESTRICT", "CASCADE").
