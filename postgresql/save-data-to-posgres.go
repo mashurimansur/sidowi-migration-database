@@ -27,11 +27,11 @@ func (postgres *PostgresConnection) InsertProvince() {
 	rows := postgres.ReadFileCSV("indonesia_provinces.csv")
 
 	for _, row := range rows[1:] {
-		province := IDProvince{
+		province := IDProvinces{
 			ID:   row[0],
 			Name: row[1],
 		}
-		postgres.DB.Model(IDProvince{}).Create(&province)
+		postgres.DB.Model(IDProvinces{}).Create(&province)
 	}
 }
 

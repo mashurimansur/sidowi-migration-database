@@ -25,7 +25,7 @@ type Kaders struct {
 	CityID         string     `gorm:"column:city_id;type:char(4);not null;" json:"city_id"`
 	DistrictID     string     `gorm:"column:district_id;type:char(7);not null;" json:"district_id"`
 	VillageID      string     `gorm:"column:village_id;type:char(10);not null;" json:"village_id"`
-	RegistrationID *uint      `gorm:"column:registration_id;varchar(10);" json:"registration_id"`
+	RegistrationID *int       `gorm:"column:registration_id;" json:"registration_id"`
 	Password       string     `gorm:"column:password;type:varchar(255);not null;" json:"password"`
 	Status         string     `gorm:"column:status;type:varchar(30)" json:"status"`
 	CreatedAt      time.Time  `json:"created_at"`
@@ -37,7 +37,7 @@ type Kaders struct {
 }
 
 type OpenRegistration struct {
-	ID                uint       `gorm:"primary_key" json:"id"`
+	ID                int        `gorm:"primary_key" json:"id"`
 	Title             string     `gorm:"column:title;type:varchar(100)" json:"title"`
 	Description       string     `gorm:"column:description;type:varchar(100)" json:"description"`
 	OpenRegistration  time.Time  `gorm:"column:open_registration;type:date" json:"open_registration"`
@@ -55,7 +55,7 @@ type Marhalahs struct {
 	Name      string    `json:"name"`
 }
 
-type IDProvince struct {
+type IDProvinces struct {
 	ID   string `type:char(2)" json:"id"`
 	Name string `json:"name"`
 }
