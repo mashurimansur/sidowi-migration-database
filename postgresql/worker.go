@@ -26,7 +26,7 @@ func openCsvFile(nameFile string) (*csv.Reader, *os.File, error) {
 	f, err := os.Open("./database/csv_indonesia/" + nameFile)
 	if err != nil {
 		if os.IsNotExist(err) {
-			log.Fatalf("%s tidak ditemukan. silakan download terlebih dahulu di https://blog.majestic.com/development/majestic-million-csv-daily\n", nameFile)
+			log.Fatalf("%s tidak ditemukan.\n", nameFile)
 		}
 
 		return nil, nil, err
