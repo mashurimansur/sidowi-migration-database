@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/mashurimansur/sidowi-migration-database/database"

@@ -3,12 +3,13 @@ package postgresql
 import (
 	"encoding/csv"
 	"fmt"
-	guuid "github.com/google/uuid"
 	"io"
 	"log"
 	"os"
 	"strconv"
 	"time"
+
+	guuid "github.com/google/uuid"
 
 	"github.com/cheggaaa/pb"
 	"github.com/mashurimansur/sidowi-migration-database/mongodb"
