@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/mashurimansur/sidowi-migration-database/database"
@@ -51,13 +50,16 @@ func main() {
 	}
 
 	//var kaders postgresql.Kaders
+	//postgres.Preload("IDProvinces").First(&kaders)
 	//postgres.Model(postgresql.Kaders{}).Preload("Roles").Where("id = ?", 2).First(&kaders)
 	////postgres.Model(postgresql.Kaders{}).Preload("IDProvince").Where("id = ?", 440).First(&kaders)
 	//
-	//s, _ := json.MarshalIndent(kaders, "", "\t")
+	//var province postgresql.IDProvinces
+	//postgres.Preload("Kaders").Where("id = ?", 73).First(&province)
+	//s, _ := json.MarshalIndent(province, "", "\t")
 	//fmt.Println(string(s))
-
-	fmt.Println("Done!")
+	//
+	//fmt.Println("Done!")
 }
 
 func SeederTable() {

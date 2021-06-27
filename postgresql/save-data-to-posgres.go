@@ -3,6 +3,7 @@ package postgresql
 import (
 	"encoding/csv"
 	"fmt"
+	guuid "github.com/google/uuid"
 	"io"
 	"log"
 	"os"
@@ -173,6 +174,7 @@ func (postgres *PostgresConnection) SeederOpenRegistration(mongoOpeRegis []mongo
 		openRegis.Title = value.Title
 		openRegis.Description = value.Description
 		openRegis.Code = value.Code
+		openRegis.UUID = guuid.New()
 		openRegis.OpenRegistration = value.OpenRegistration
 		openRegis.CloseRegistration = value.CloseRegistration
 		openRegis.CreatedAt = value.CreatedAt
