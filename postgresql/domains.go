@@ -1,8 +1,9 @@
 package postgresql
 
 import (
-	guuid "github.com/google/uuid"
 	"time"
+
+	guuid "github.com/google/uuid"
 )
 
 // Kaders adfasd
@@ -20,13 +21,13 @@ type Kaders struct {
 	Address        string     `gorm:"column:address;type:varchar(255);not null;" json:"address"`
 	Phone          string     `gorm:"column:phone;type:varchar(15);unique;not null;" json:"phone"`
 	BloodType      string     `gorm:"column:blood_type;type:char(2);not null;" json:"blood_type"`
-	Gender         string     `gorm:"column:gender;type:char(2);not null;" json:"gender"`
+	Gender         string     `gorm:"column:gender;type:char(1);not null;" json:"gender"`
 	ZipCode        string     `gorm:"column:zip_code;type:varchar(7);not null;" json:"zip_code"`
 	ProvinceID     string     `gorm:"column:province_id;type:char(2);not null;" json:"province_id"`
 	CityID         string     `gorm:"column:city_id;type:char(4);not null;" json:"city_id"`
 	DistrictID     string     `gorm:"column:district_id;type:char(7);not null;" json:"district_id"`
 	VillageID      string     `gorm:"column:village_id;type:char(10);not null;" json:"village_id"`
-	RegistrationID *uint       `gorm:"column:registration_id;" json:"registration_id"`
+	RegistrationID *uint      `gorm:"column:registration_id;" json:"registration_id"`
 	Password       string     `gorm:"column:password;type:varchar(255);not null;" json:"password"`
 	Status         string     `gorm:"column:status;type:varchar(30)" json:"status"`
 	CreatedAt      time.Time  `json:"created_at"`
@@ -35,12 +36,12 @@ type Kaders struct {
 
 	//Roles []Roles `gorm:"many2many:kaders_roles" json:",omitempty"`
 	//Province IDProvince `gorm:"foreignkey:ID;references:province_id"`
-	Province IDProvinces
+	Province         IDProvinces
 	OpenRegistration OpenRegistration
 }
 
 type OpenRegistration struct {
-	ID                uint        `gorm:"primary_key" json:"id"`
+	ID                uint       `gorm:"primary_key" json:"id"`
 	Title             string     `gorm:"column:title;type:varchar(100)" json:"title"`
 	Description       string     `gorm:"column:description;type:varchar(100)" json:"description"`
 	OpenRegistration  time.Time  `gorm:"column:open_registration;type:date" json:"open_registration"`
