@@ -8,34 +8,34 @@ import (
 
 // Kaders adfasd
 type Kaders struct {
-	ID               uint       `gorm:"primary_key" json:"id"`
-	Name             string     `gorm:"column:name;type:varchar(100);not null;" json:"name"`
-	Email            string     `gorm:"column:email;type:varchar(255);unique;not null;" json:"email"`
-	NIK              *string    `gorm:"column:nik;type:char(16);unique" json:"nik"`
-	DateBirth        time.Time  `gorm:"column:date_birth;type:date;not null;" json:"date_birth"`
-	PlaceBirth       string     `gorm:"column:place_birth;type:varchar(50);not null;" json:"place_birth"`
-	Avatar           string     `gorm:"column:avatar;type:varchar(255);not null;" json:"avatar"`
-	Job              string     `gorm:"column:job;type:varchar(100);not null;" json:"job"`
-	Office           string     `gorm:"column:office;type:varchar(100);not null;" json:"office"`
-	Skills           string     `gorm:"column:skills;type:varchar(255);not null;" json:"skills"`
-	Address          string     `gorm:"column:address;type:varchar(255);not null;" json:"address"`
-	Phone            string     `gorm:"column:phone;type:varchar(15);unique;not null;" json:"phone"`
-	BloodType        string     `gorm:"column:blood_type;type:char(2);not null;" json:"blood_type"`
-	Gender           string     `gorm:"column:gender;type:char(1);not null;" json:"gender"`
-	ZipCode          string     `gorm:"column:zip_code;type:varchar(7);not null;" json:"zip_code"`
-	ProvinceID       string     `gorm:"column:province_id;type:char(2);not null;" json:"province_id"`
-	CityID           string     `gorm:"column:city_id;type:char(4);not null;" json:"city_id"`
-	DistrictID       string     `gorm:"column:district_id;type:char(7);not null;" json:"district_id"`
-	VillageID        string     `gorm:"column:village_id;type:char(10);not null;" json:"village_id"`
-	RegistrationID   *uint      `gorm:"column:registration_id;" json:"registration_id"`
-	Password         string     `gorm:"column:password;type:varchar(255);not null;" json:"password"`
-	Status           string     `gorm:"column:status;type:varchar(30)" json:"status"`
-	CampusName       string     `gorm:"column:campus_name;type:varchar(30)" json:"campus_name"`
-	CampusMajor      string     `gorm:"column:campus_major;type:varchar(30)" json:"campus_major"`
-	CampusGeneration string     `gorm:"column:campus_generation;type:char(4)" json:"campus_generation"`
-	CreatedAt        time.Time  `json:"created_at"`
-	UpdatedAt        time.Time  `json:"updated_at"`
-	DeletedAt        *time.Time `sql:"index" json:"deleted_at"`
+	ID             uint       `gorm:"primary_key" json:"id"`
+	Name           string     `gorm:"column:name;type:varchar(100);not null;" json:"name"`
+	Email          string     `gorm:"column:email;type:varchar(255);unique;not null;" json:"email"`
+	NIK            *string    `gorm:"column:nik;type:char(16);unique" json:"nik"`
+	DateBirth      time.Time  `gorm:"column:date_birth;type:date;not null;" json:"date_birth"`
+	PlaceBirth     string     `gorm:"column:place_birth;type:varchar(50);not null;" json:"place_birth"`
+	Avatar         string     `gorm:"column:avatar;type:varchar(255);not null;" json:"avatar"`
+	Job            string     `gorm:"column:job;type:varchar(100);not null;" json:"job"`
+	Office         string     `gorm:"column:office;type:varchar(100);not null;" json:"office"`
+	Skills         string     `gorm:"column:skills;type:varchar(255);not null;" json:"skills"`
+	Address        string     `gorm:"column:address;type:varchar(255);not null;" json:"address"`
+	Phone          string     `gorm:"column:phone;type:varchar(15);unique;not null;" json:"phone"`
+	BloodType      string     `gorm:"column:blood_type;type:char(2);not null;" json:"blood_type"`
+	Gender         string     `gorm:"column:gender;type:char(1);not null;" json:"gender"`
+	ZipCode        string     `gorm:"column:zip_code;type:varchar(7);not null;" json:"zip_code"`
+	ProvinceID     string     `gorm:"column:province_id;type:char(2);not null;" json:"province_id"`
+	CityID         string     `gorm:"column:city_id;type:char(4);not null;" json:"city_id"`
+	DistrictID     string     `gorm:"column:district_id;type:char(7);not null;" json:"district_id"`
+	VillageID      string     `gorm:"column:village_id;type:char(10);not null;" json:"village_id"`
+	RegistrationID *uint      `gorm:"column:registration_id;" json:"registration_id"`
+	Password       string     `gorm:"column:password;type:varchar(255);not null;" json:"password"`
+	Status         string     `gorm:"column:status;type:varchar(30)" json:"status"`
+	CampusName     string     `gorm:"column:campus_name;type:varchar(30)" json:"campus_name"`
+	CampusMajor    string     `gorm:"column:campus_major;type:varchar(30)" json:"campus_major"`
+	CampusBatch    string     `gorm:"column:campus_batch;type:varchar(4)" json:"campus_batch"`
+	CreatedAt      time.Time  `json:"created_at"`
+	UpdatedAt      time.Time  `json:"updated_at"`
+	DeletedAt      *time.Time `sql:"index" json:"deleted_at"`
 
 	//Roles []Roles `gorm:"many2many:kaders_roles" json:",omitempty"`
 	//Province IDProvince `gorm:"foreignkey:ID;references:province_id"`
