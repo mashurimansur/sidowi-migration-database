@@ -64,7 +64,7 @@ type Marhalahs struct {
 }
 
 type IDProvinces struct {
-	ID   string `type:char(2)" json:"id"`
+	ID   string `gorm:"type:char(2)" json:"id"`
 	Name string `json:"name"`
 
 	Kaders []Kaders `gorm:"ForeignKey:ProvinceID"`
@@ -72,7 +72,7 @@ type IDProvinces struct {
 
 // IDCities struct for city
 type IDCities struct {
-	ID         string `type:char(4);" json:"id"`
+	ID         string `gorm:"type:char(4)" json:"id"`
 	ProvinceID string `gorm:"type:char(2)" json:"province_id"`
 	Name       string `json:"name"`
 }
@@ -86,7 +86,7 @@ type IDDistricts struct {
 
 // IDVillages struct for village
 type IDVillages struct {
-	ID         string `type:char(10)" json:"id"`
+	ID         string `gorm:"type:char(10)" json:"id"`
 	DistrictID string `gorm:"type:char(7)" json:"district_id"`
 	Name       string `json:"name"`
 }
