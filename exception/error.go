@@ -7,9 +7,3 @@ func FatalErrorIfNeeded(err error) {
 		log.Fatal(err.Error())
 	}
 }
-
-func PanicIfNeeded(err interface{}) {
-	if err != nil {
-		panic(err)
-	}
-}
