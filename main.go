@@ -104,6 +104,7 @@ func MigrateTable() {
 		AddForeignKey("roles_id", "roles(id)", "CASCADE", "CASCADE")
 }
 
+// DropTable : function for drop table database
 func DropTable() {
 	postgres.DropTableIfExists(
 		&postgresql.KadersRoles{},
