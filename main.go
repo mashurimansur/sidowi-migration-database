@@ -79,6 +79,7 @@ func SeederTable() {
 	postgresData.SeederKader(mongoKaders)
 }
 
+// MigrateTable : function for migrate table to database
 func MigrateTable() {
 	postgres.AutoMigrate(
 		&postgresql.Kaders{},
