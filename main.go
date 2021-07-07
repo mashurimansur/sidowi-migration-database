@@ -63,6 +63,7 @@ func main() {
 	//fmt.Println("Done!")
 }
 
+// SeederTable : function for seed data to table database
 func SeederTable() {
 	postgresData := postgresql.NewPostgresConnection(postgres)
 	mongoData := mongodb.NewMongoConnection(mongo)
