@@ -68,6 +68,7 @@ func (mongo *MongoConnection) GetAllKaders() (kaders []MongoKaders, err error) {
 	return
 }
 
+// GetAllOpenRegis : function for get all data open registration from mongodb
 func (mongo *MongoConnection) GetAllOpenRegis() (openRegis []MongoOpenRegistration, err error) {
 	if err = mongo.Mongo.C("open_registration").Find(nil).All(&openRegis); err != nil {
 		return nil, err
