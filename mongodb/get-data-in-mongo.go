@@ -60,6 +60,7 @@ func NewMongoConnection(mongo *mgo.Database) *MongoConnection {
 	return &MongoConnection{Mongo: mongo}
 }
 
+// GetAllKaders : fucntion for get all data kaders from mongodb
 func (mongo *MongoConnection) GetAllKaders() (kaders []MongoKaders, err error) {
 	if err = mongo.Mongo.C("kaders").Find(nil).All(&kaders); err != nil {
 		return nil, err
