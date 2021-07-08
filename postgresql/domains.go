@@ -11,7 +11,7 @@ type Kaders struct {
 	ID             uint       `gorm:"primary_key" json:"id"`
 	Name           string     `gorm:"column:name;type:varchar(100);not null;" json:"name"`
 	Email          string     `gorm:"column:email;type:varchar(255);unique;not null;" json:"email"`
-	NIK            string     `gorm:"column:nik;type:varchar(16);unique" json:"nik"`
+	NIK            *string    `gorm:"column:nik;type:varchar(16);unique" json:"nik"`
 	DateBirth      time.Time  `gorm:"column:date_birth;type:date;not null;" json:"date_birth"`
 	PlaceBirth     string     `gorm:"column:place_birth;type:varchar(50);not null;" json:"place_birth"`
 	Avatar         string     `gorm:"column:avatar;type:varchar(255);not null;" json:"avatar"`
