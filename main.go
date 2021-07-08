@@ -52,7 +52,6 @@ func main() {
 		return
 	}
 
-	// drop -> migrate -> seed data
 	if *dataseed {
 		DropTable()
 		fmt.Printf("\033[1;31m%s\033[0m", "Succesfully Drop Table.\n")
