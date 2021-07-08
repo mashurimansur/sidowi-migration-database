@@ -3,11 +3,12 @@ package postgresql
 import (
 	"context"
 	"fmt"
-	"github.com/jinzhu/gorm"
 	"log"
 	"math"
 	"sync"
 	"time"
+
+	"github.com/jinzhu/gorm"
 )
 
 func (posgres *PostgresConnection) WorkerProvince() {
@@ -56,10 +57,10 @@ func doTheJobProvince(workerIndex, counter int, db *gorm.DB, values []interface{
 			}()
 
 			// query here
-			conn, err := db.DB().Conn(context.Background())
-			query := fmt.Sprintf("INSERT INTO id_provinces (id, name) VALUES ($1, $2)")
+			conn, _ := db.DB().Conn(context.Background())
+			query := "INSERT INTO id_provinces (id, name) VALUES ($1, $2)"
 
-			_, err = conn.ExecContext(context.Background(), query, values...)
+			_, err := conn.ExecContext(context.Background(), query, values...)
 			if err != nil {
 				log.Fatal(err.Error())
 			}
