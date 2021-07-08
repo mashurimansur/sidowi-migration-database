@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
@@ -33,6 +34,7 @@ func main() {
 	migrate := flag.Bool("migrate", false, "to migrate table")
 	seed := flag.Bool("seed", false, "to insert data to table")
 	drop := flag.Bool("drop", false, "to drop table")
+	dataseed := flag.Bool("dataseed", false, "to drop migrate and seed table")
 	flag.Parse()
 
 	if *migrate {
@@ -47,6 +49,15 @@ func main() {
 
 	if *drop {
 		DropTable()
+		return
+	}
+
+	if *dataseed {
+		DropTable()
+		fmt.Println("Succesfully Drop Table.")
+		MigrateTable()
+		fmt.Println("Succesfully Migrate Table.")
+		SeederTable()
 		return
 	}
 
