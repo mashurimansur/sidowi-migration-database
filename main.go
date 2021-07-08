@@ -62,6 +62,8 @@ func main() {
 		return
 	}
 
+	// test issue
+
 	//var kaders postgresql.Kaders
 	//postgres.Preload("IDProvinces").First(&kaders)
 	//postgres.Model(postgresql.Kaders{}).Preload("Roles").Where("id = ?", 2).First(&kaders)
