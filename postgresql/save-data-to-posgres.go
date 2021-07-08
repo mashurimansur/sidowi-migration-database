@@ -119,11 +119,7 @@ func (postgres *PostgresConnection) SeederKader(mongoKaders []mongodb.MongoKader
 		var kader Kaders
 		kader.Email = value.Email
 		kader.Name = value.Name
-		if value.NIK != "" {
-			kader.NIK = &value.NIK
-		} else {
-			kader.NIK = nil
-		}
+		kader.NIK = value.NIK
 		kader.DateBirth = value.DateBirth
 		kader.PlaceBirth = value.PlaceBirth
 		kader.Avatar = value.Avatar
