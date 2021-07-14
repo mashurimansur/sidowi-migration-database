@@ -36,11 +36,12 @@ type Kaders struct {
 	CreatedAt      time.Time  `json:"created_at"`
 	UpdatedAt      time.Time  `json:"updated_at"`
 	DeletedAt      *time.Time `sql:"index" json:"deleted_at"`
+	// Role           string     `json:"role"`
 
 	//Roles []Roles `gorm:"many2many:kaders_roles" json:",omitempty"`
 	//Province IDProvince `gorm:"foreignkey:ID;references:province_id"`
-	Province         IDProvinces
-	OpenRegistration OpenRegistration
+	// Province         IDProvinces
+	// OpenRegistration OpenRegistration
 }
 
 type OpenRegistration struct {
@@ -104,4 +105,24 @@ type Roles struct {
 type KadersRoles struct {
 	KadersID uint
 	RolesID  uint
+}
+
+type Halaqahs struct {
+	ID               uint       `gorm:"primary_key" json:"id"`
+	Name             string     `gorm:"column:name;type:varchar(30);not null" json:"name"`
+	TarbiyahTime     time.Time  `gorm:"column:tarbiyah_time;type:date;not null" json:"tarbiyah_time"`
+	TarbiyahLocation string     `gorm:"column:tarbiyah_location;type:varchar(50);not null" json:"tarbiyah_location"`
+	TarbiyahType     string     `gorm:"column:tarbiyah_type;type:varchar(10);not null" json:"tarbiyah_type"`
+	MarhalahID       uint       `gorm:"column:marhalah_id;not null" json:"marhalah_id"`
+	CreatedAt        time.Time  `json:"created_at"`
+	UpdatedAt        time.Time  `json:"updated_at"`
+	DeletedAt        *time.Time `sql:"index" json:"deleted_at"`
+	Kaders           []Kaders   `gorm:"many2many:halaqahs_kaders" json:"kaders,omitempty"`
+}
+
+type HalaqahsKaders struct {
+	ID         uint `gorm:"primary_key" json:"id"`
+	KadersID   uint
+	HalaqahsID uint
+	Role       string
 }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
 
@@ -75,6 +76,12 @@ func main() {
 	//fmt.Println(string(s))
 	//
 	//fmt.Println("Done!")
+
+	var halaqah []postgresql.Halaqahs
+	postgres.Model(postgresql.Halaqahs{}).Preload("Kaders").Find(&halaqah)
+	s, _ := json.MarshalIndent(halaqah, "", "\t")
+	fmt.Println(string(s))
+
 }
 
 // SeederTable : function for seed data to table database
@@ -106,6 +113,8 @@ func MigrateTable() {
 		&postgresql.IDVillages{},
 		&postgresql.Roles{},
 		&postgresql.KadersRoles{},
+		&postgresql.Halaqahs{},
+		&postgresql.HalaqahsKaders{},
 	)
 
 	postgres.Model(&postgresql.Kaders{}).
@@ -118,13 +127,21 @@ func MigrateTable() {
 	postgres.Model(postgresql.KadersRoles{}).
 		AddForeignKey("kaders_id", "kaders(id)", "CASCADE", "CASCADE").
 		AddForeignKey("roles_id", "roles(id)", "CASCADE", "CASCADE")
+
+	postgres.Model(postgresql.HalaqahsKaders{}).
+		AddForeignKey("kaders_id", "kaders(id)", "CASCADE", "CASCADE").
+		AddForeignKey("halaqahs_id", "halaqahs(id)", "CASCADE", "CASCADE")
+
+	postgres.Model(postgresql.Halaqahs{}).AddForeignKey("marhalah_id", "marhalahs(id)", "RESTRICT", "CASCADE")
 }
 
 // DropTable : function for drop table database
 func DropTable() {
 	postgres.DropTableIfExists(
+		&postgresql.HalaqahsKaders{},
 		&postgresql.KadersRoles{},
 		&postgresql.Roles{},
+		&postgresql.Halaqahs{},
 		&postgresql.Marhalahs{},
 		&postgresql.Kaders{},
 		&postgresql.OpenRegistration{},
@@ -134,5 +151,4 @@ func DropTable() {
 		&postgresql.IDDistricts{},
 		&postgresql.IDVillages{},
 	)
-
 }
