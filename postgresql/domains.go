@@ -126,3 +126,17 @@ type HalaqahsKaders struct {
 	HalaqahsID uint
 	Role       string
 }
+
+type HistoryHalaqah struct {
+	ID        uint      `gorm:"primary_key" json:"id"`
+	CreatedAt time.Time `json:"created_at"`
+	HalaqahID uint      `json:"halaqah_id"`
+	Message   string    `json:"message"`
+}
+
+type HistoryKader struct {
+	ID        uint      `gorm:"primary_key" json:"id"`
+	CreatedAt time.Time `json:"created_at"`
+	KaderID   uint      `json:"kader_id"`
+	Message   string    `json:"message"`
+}

@@ -115,6 +115,8 @@ func MigrateTable() {
 		&postgresql.KadersRoles{},
 		&postgresql.Halaqahs{},
 		&postgresql.HalaqahsKaders{},
+		&postgresql.HistoryHalaqah{},
+		&postgresql.HistoryKader{},
 	)
 
 	postgres.Model(&postgresql.Kaders{}).
@@ -133,11 +135,16 @@ func MigrateTable() {
 		AddForeignKey("halaqahs_id", "halaqahs(id)", "CASCADE", "CASCADE")
 
 	postgres.Model(postgresql.Halaqahs{}).AddForeignKey("marhalah_id", "marhalahs(id)", "RESTRICT", "CASCADE")
+
+	postgres.Model(postgresql.HistoryKader{}).AddForeignKey("kader_id", "kaders(id)", "CASCADE", "CASCADE")
+	postgres.Model(postgresql.HistoryHalaqah{}).AddForeignKey("halaqah_id", "halaqahs(id)", "CASCADE", "CASCADE")
 }
 
 // DropTable : function for drop table database
 func DropTable() {
 	postgres.DropTableIfExists(
+		&postgresql.HistoryHalaqah{},
+		&postgresql.HistoryKader{},
 		&postgresql.HalaqahsKaders{},
 		&postgresql.KadersRoles{},
 		&postgresql.Roles{},
