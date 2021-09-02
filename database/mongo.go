@@ -7,6 +7,7 @@ import (
 	"gopkg.in/mgo.v2"
 )
 
+// ConnectMongo to connect database mongodb
 func ConnectMongo() *mgo.Database {
 	mongoAdds := fmt.Sprintf("%s:%s", Environment.MongoHost, Environment.MongoPort)
 	infoDial := &mgo.DialInfo{

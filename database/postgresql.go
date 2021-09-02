@@ -2,8 +2,9 @@ package database
 
 import (
 	"fmt"
-	"github.com/jinzhu/gorm"
 	"log"
+
+	"github.com/jinzhu/gorm"
 )
 
 // ConnectPostgres to connect database postgresql
