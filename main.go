@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
 	"fmt"
 
@@ -77,10 +76,10 @@ func main() {
 	//
 	//fmt.Println("Done!")
 
-	var halaqah []postgresql.Halaqahs
-	postgres.Model(postgresql.Halaqahs{}).Preload("Kaders").Find(&halaqah)
-	s, _ := json.MarshalIndent(halaqah, "", "\t")
-	fmt.Println(string(s))
+	// var halaqah []postgresql.Halaqahs
+	// postgres.Model(postgresql.Halaqahs{}).Preload("Kaders").Find(&halaqah)
+	// s, _ := json.MarshalIndent(halaqah, "", "\t")
+	// fmt.Println(string(s))
 
 }
 
