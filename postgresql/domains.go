@@ -110,7 +110,8 @@ type KadersRoles struct {
 type Halaqahs struct {
 	ID               uint       `gorm:"primary_key" json:"id"`
 	Name             string     `gorm:"column:name;type:varchar(30);not null" json:"name"`
-	TarbiyahTime     time.Time  `gorm:"column:tarbiyah_time;type:date;not null" json:"tarbiyah_time"`
+	TarbiyahTime     string     `gorm:"column:tarbiyah_time;type:time(6);not null" json:"tarbiyah_time"`
+	TarbiyahDay      string     `gorm:"column:tarbiyah_day;type:varchar(10);not null" json:"tarbiyah_day"`
 	TarbiyahLocation string     `gorm:"column:tarbiyah_location;type:varchar(50);not null" json:"tarbiyah_location"`
 	TarbiyahType     string     `gorm:"column:tarbiyah_type;type:varchar(10);not null" json:"tarbiyah_type"`
 	MarhalahID       uint       `gorm:"column:marhalah_id;not null" json:"marhalah_id"`
