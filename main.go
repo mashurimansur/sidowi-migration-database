@@ -111,11 +111,14 @@ func MigrateTable() {
 		&postgresql.IDDistricts{},
 		&postgresql.IDVillages{},
 		&postgresql.Roles{},
+		&postgresql.Mosque{},
 		&postgresql.KadersRoles{},
 		&postgresql.Halaqahs{},
 		&postgresql.HalaqahsKaders{},
 		&postgresql.HistoryHalaqah{},
 		&postgresql.HistoryKader{},
+		&postgresql.Attendances{},
+		&postgresql.AttendancesKaders{},
 	)
 
 	postgres.Model(&postgresql.Kaders{}).
@@ -132,6 +135,10 @@ func MigrateTable() {
 	postgres.Model(postgresql.HalaqahsKaders{}).
 		AddForeignKey("kaders_id", "kaders(id)", "CASCADE", "CASCADE").
 		AddForeignKey("halaqahs_id", "halaqahs(id)", "CASCADE", "CASCADE")
+
+	postgres.Model(&postgresql.AttendancesKaders{}).
+		AddForeignKey("kaders_id", "kaders(id)", "CASCADE", "CASCADE").
+		AddForeignKey("attendances_id", "attendances(id)", "CASCADE", "CASCADE")
 
 	postgres.Model(postgresql.Halaqahs{}).AddForeignKey("marhalah_id", "marhalahs(id)", "RESTRICT", "CASCADE")
 
@@ -143,6 +150,8 @@ func MigrateTable() {
 func DropTable() {
 	postgres.DropTableIfExists(
 		&postgresql.HistoryHalaqah{},
+		&postgresql.Attendances{},
+		&postgresql.AttendancesKaders{},
 		&postgresql.HistoryKader{},
 		&postgresql.HalaqahsKaders{},
 		&postgresql.KadersRoles{},
@@ -150,11 +159,14 @@ func DropTable() {
 		&postgresql.Halaqahs{},
 		&postgresql.Marhalahs{},
 		&postgresql.Kaders{},
+		&postgresql.Mosque{},
 		&postgresql.OpenRegistration{},
 		&postgresql.IDProvinces{},
 		&postgresql.IDCities{},
 		&postgresql.IDDistricts{},
 		&postgresql.IDVillages{},
+		&postgresql.HistoryHalaqah{},
+		&postgresql.HistoryKader{},
 	)
 }
 
@@ -166,25 +178,35 @@ func DropTableWithoutLocation() {
 	postgres.DropTableIfExists(
 		&postgresql.HistoryHalaqah{},
 		&postgresql.HistoryKader{},
+		&postgresql.AttendancesKaders{},
+		&postgresql.Attendances{},
 		&postgresql.HalaqahsKaders{},
 		&postgresql.KadersRoles{},
 		&postgresql.Roles{},
 		&postgresql.Halaqahs{},
 		&postgresql.Marhalahs{},
 		&postgresql.Kaders{},
+		&postgresql.Mosque{},
 		&postgresql.OpenRegistration{},
+		&postgresql.HistoryHalaqah{},
+		&postgresql.HistoryKader{},
 	)
 }
 
 func MigrateTableWithoutLocation() {
 	postgres.AutoMigrate(
 		&postgresql.Kaders{},
+		&postgresql.Attendances{},
+		&postgresql.AttendancesKaders{},
 		&postgresql.Marhalahs{},
 		&postgresql.OpenRegistration{},
 		&postgresql.Roles{},
 		&postgresql.KadersRoles{},
 		&postgresql.Halaqahs{},
 		&postgresql.HalaqahsKaders{},
+		&postgresql.HistoryHalaqah{},
+		&postgresql.HistoryKader{},
+		&postgresql.Mosque{},
 		&postgresql.HistoryHalaqah{},
 		&postgresql.HistoryKader{},
 	)
@@ -203,6 +225,10 @@ func MigrateTableWithoutLocation() {
 	postgres.Model(postgresql.HalaqahsKaders{}).
 		AddForeignKey("kaders_id", "kaders(id)", "CASCADE", "CASCADE").
 		AddForeignKey("halaqahs_id", "halaqahs(id)", "CASCADE", "CASCADE")
+
+	postgres.Model(&postgresql.AttendancesKaders{}).
+		AddForeignKey("kaders_id", "kaders(id)", "CASCADE", "CASCADE").
+		AddForeignKey("attendances_id", "attendances(id)", "CASCADE", "CASCADE")
 
 	postgres.Model(postgresql.Halaqahs{}).AddForeignKey("marhalah_id", "marhalahs(id)", "RESTRICT", "CASCADE")
 

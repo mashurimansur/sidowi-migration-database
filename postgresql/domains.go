@@ -141,3 +141,39 @@ type HistoryKader struct {
 	KaderID   uint      `json:"kader_id"`
 	Message   string    `json:"message"`
 }
+
+type Mosque struct {
+	ID           uint      `gorm:"primary_key" json:"id"`
+	CreatedAt    time.Time `json:"created_at"`
+	UpdatedAt    time.Time `json:"updated_at"`
+	Name         string    `gorm:"column:name;type:varchar(100);not null;" json:"name"`
+	ManagerName  string    `gorm:"column:manager_name;type:varchar(100);not null;" json:"manager_name"`
+	ManagerPhone string    `gorm:"column:manager_phone;type:varchar(15);unique;not null;" json:"manager_phone"`
+	DistrictID   string    `gorm:"column:district_id;type:char(7);not null;" json:"district_id"`
+	VillageID    string    `gorm:"column:village_id;type:char(10);not null;" json:"village_id"`
+	Address      string    `gorm:"column:address;type:varchar(100);not null" json:"address"`
+	MapLocation  string    `gorm:"column:map_location;type:varchar(100);not null" json:"map_location"`
+	Level        int32     `json:"level"`
+}
+
+type Attendances struct {
+	ID           uint      `gorm:"primary_key" json:"id"`
+	CreatedAt    time.Time `json:"created_at"`
+	UpdatedAt    time.Time `json:"updated_at"`
+	HalaqahID    uint      `json:"halaqah_id"`
+	TarbiyahDate time.Time `json:"tarbiyah_date"`
+	Note         string    `gorm:"column:note;type:varchar(100);" json:"note"`
+	Material     string    `gorm:"column:material;type:varchar(50);" json:"material"`
+	Jasadiyah    bool      `json:"jasadiyah"`
+	Type         string    `json:"type"`
+	Tahsin       string    `gorm:"column:tahsin;type:varchar(20);not null;" json:"tahsin"`
+}
+
+type AttendancesKaders struct {
+	ID            uint   `gorm:"primary_key" json:"id"`
+	KadersID      uint   `json:"kaders_id"`
+	AttendancesID uint   `json:"attendaces_id"`
+	Presence      string `gorm:"column:presence;type:varchar(20);not null;" json:"presence"`
+	Memorization  string `gorm:"column:memorization;type:varchar(20);" json:"memorization"`
+	Infaq         int    `gorm:"column:infaq;" json:"infaq"`
+}
