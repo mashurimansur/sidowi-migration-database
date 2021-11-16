@@ -149,11 +149,12 @@ type Mosque struct {
 	Name         string    `gorm:"column:name;type:varchar(100);not null;" json:"name"`
 	ManagerName  string    `gorm:"column:manager_name;type:varchar(100);not null;" json:"manager_name"`
 	ManagerPhone string    `gorm:"column:manager_phone;type:varchar(15);not null;" json:"manager_phone"`
+	CityID       string    `gorm:"column:city_id;type:char(4);not null;" json:"city_id"`
 	DistrictID   string    `gorm:"column:district_id;type:char(7);not null;" json:"district_id"`
 	VillageID    string    `gorm:"column:village_id;type:char(10);not null;" json:"village_id"`
 	Address      string    `gorm:"column:address;type:varchar(100);not null" json:"address"`
 	MapLocation  string    `gorm:"column:map_location;type:varchar(100);not null" json:"map_location"`
-	Level        string    `gorm:"column:level;type:varchar(20);not null"json:"level"`
+	Level        string    `gorm:"column:level;type:varchar(20);not null" json:"level"`
 }
 
 type Attendances struct {
