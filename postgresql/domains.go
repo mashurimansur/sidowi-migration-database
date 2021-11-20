@@ -177,4 +177,5 @@ type AttendancesKaders struct {
 	Presence      string `gorm:"column:presence;type:varchar(20);not null;" json:"presence"`
 	Memorization  string `gorm:"column:memorization;type:varchar(100);" json:"memorization"`
 	Infaq         int    `gorm:"column:infaq;" json:"infaq"`
+	Note          string `gorm:"column:note;type:varchar(100);" json:"note"`
 }
